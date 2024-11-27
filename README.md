@@ -5,7 +5,7 @@ This repository contains scripts, pipelines, and configurations for automating a
 ## Tools Used
 - **Jenkins**: Automates CI/CD workflows.
 - **Docker**: Containerizes applications for scalability.
-- **Python**: Scripts for automation and maintenance.
+- **Python**: Scripts for automation the workflow.
 - **Bash**: For operational task execution.
 - **SLURM**: Schedules batch jobs.
 - **Groovy**: Defines Jenkins pipelines.
@@ -17,14 +17,15 @@ This repository contains scripts, pipelines, and configurations for automating a
 - Modular design for easy scalability.
 
 ## Repository Structure
-HPC-Preventive-Maintenance/ 
-├── Dockerfile.stage 
-├── initStageTests.sh 
-├── inventoryFile.txt 
-├── jenkinsfileEnviromentVariables.groovy 
-├── monthMaintanenceTest.jenkinsfile 
-├── monthMaintanenceTest.py 
-├── slurmBatchJob.sh 
-├── testsFolder/ 
-├── wrapTestsFolder/ 
-└── README.md
+HPC-Preventive-Maintenance/  
+├── Dockerfile.stage  
+├── initStageTests.sh  
+├── inventoryFile.txt  
+├── jenkinsfileEnviromentVariables.groovy  
+├── monthMaintanenceTest.jenkinsfile  
+├── monthMaintanenceTest.py  
+├── slurmBatchJob.sh  
+├── testsFolder/  
+├── wrapTestsFolder/  
+└── README.md  
+

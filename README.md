@@ -17,4 +17,14 @@ This repository contains scripts, pipelines, and configurations for automating a
 - Modular design for easy scalability.
 
 ## Repository Structure
-HPC-main/ ├── Dockerfile.stage ├── initStageTests.sh ├── inventoryFile.txt ├── jenkinsfileEnviromentVariables.groovy ├── monthMaintanenceTest.jenkinsfile ├── monthMaintanenceTest.py ├── slurmBatchJob.sh ├── testsFolder/ ├── wrapTestsFolder/ └── README.md
+HPC-Preventive-Maintenance/ 
+├── Dockerfile.stage 
+├── initStageTests.sh 
+├── inventoryFile.txt 
+├── jenkinsfileEnviromentVariables.groovy 
+├── monthMaintanenceTest.jenkinsfile 
+├── monthMaintanenceTest.py 
+├── slurmBatchJob.sh 
+├── testsFolder/ 
+├── wrapTestsFolder/ 
+└── README.md

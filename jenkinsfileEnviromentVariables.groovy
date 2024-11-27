@@ -11,7 +11,7 @@ env.elasticUser='elastic'
 env.elasticPort='9200'
 env.elasticNewIndexName='month-test'
 
-if (System.getenv('HOSTNAME').contains('jenkins')) {
+if (System.getenv('HOSTNAME').contains('stageEnv')) {
     env.nodeWorkingDir='/nfsshare'
     env.slurmIP='192.168.100.214'
     env.elasticIP='192.168.100.234'

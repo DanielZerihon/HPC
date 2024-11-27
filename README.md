@@ -17,6 +17,7 @@ This repository contains scripts, pipelines, and configurations for automating a
 - Modular design for easy scalability.
 
 ## Repository Structure
+```
 HPC-Preventive-Maintenance/  
 ├── Dockerfile.stage  
 ├── initStageTests.sh  
@@ -28,4 +29,4 @@ HPC-Preventive-Maintenance/
 ├── testsFolder/  
 ├── wrapTestsFolder/  
 └── README.md  
-
+```

@@ -1,0 +1,5 @@
+# this docker is used in the internet env for the jenkins pipeline job.
+
+FROM avimorgm/provisioner_builder_new:latest
+
+RUN pip3 install --no-cache-dir pyyaml

@@ -1,0 +1,2 @@
+slurm-worker1.optimus.local,
+slurm-worker2.optimus.local

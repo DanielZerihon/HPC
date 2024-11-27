@@ -1,0 +1,76 @@
+podTemplate(
+    label: 'month-maintanence-job',
+    containers: [
+        containerTemplate(
+            name: 'month-maintanence-job',
+            image: 'danielzerihon/monthly-tests-pipeline:latest',
+            alwaysPullImage : true,
+            command: 'sleep 99999',
+            ttyEnabled: true
+        )
+    ],
+    volumes: [
+        hostPathVolume(mountPath: '/nfsshare', hostPath: '/nfsshare'),
+    ]
+    ) {
+    node('month-maintanence-job') {
+    String monthlyMaintenanceTestsFolderPath = 'monthlyMaintenanceTests'
+    properties([
+        buildDiscarder(logRotator(daysToKeepStr: '50')),
+        pipelineTriggers([ cron('0 0 1 * *') ])
+    ])
+    timeout(time: 120, unit: 'MINUTES') {
+        try{
+            stage('checkoutStage') {
+                container('month-maintanence-job'){
+                    checkout([
+                        $class: 'GitSCM',
+                        userRemoteConfigs: [[
+                            url: 'https://gitlab.com/optimus3435034/jenkinsfiles.git'
+                        ]],
+                        branches: [[name: '*/insertBatchScript']],
+                        extensions: [[
+                            $class: 'CloneOption',
+                            depth: 1,
+                            noTags: true,
+                            reference: '',
+                            shallow: true
+                        ]]
+                    ])
+                }
+            }
+            stage('prapereStage') {
+                container('month-maintanence-job'){
+                    String nfsFolder= '/nfsshare/'
+                    String copyToShareFolder = 'slurmBatchJob.sh wrapTestsFolder testsFolder'
+                    dir("${env.WORKSPACE}/${monthlyMaintenanceTestsFolderPath}") {
+                        load "jenkinsfileEnviromentVariables.groovy"
+                        sh """
+                        bash initStageTests.sh
+                        cp -rfp $copyToShareFolder $nfsFolder
+                        """
+                    }
+                }
+            }
+            stage('runTestsStage') {
+                container('month-maintanence-job'){
+                    def monthMaintanenceTestFileName = 'monthMaintanenceTest.py'
+                    withCredentials([
+                        string(credentialsId: 'slurmRestAPI_token', variable: 'SLURM_REST_API_TOKEN'),
+                        string(credentialsId: 'elasticCLiPassword', variable: 'elasticPassword'),
+                        ]) {
+                        dir("${env.WORKSPACE}/${monthlyMaintenanceTestsFolderPath}") {
+                            sh """
+                            python3 ${monthMaintanenceTestFileName}
+                            """
+                        }
+                    }
+                }
+            }
+        } catch (Exception e){
+            echo "An error occurred: ${e.message}"
+            currentBuild.result = 'FAILURE'
+        }
+    }
+}
+}

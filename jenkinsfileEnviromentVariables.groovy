@@ -13,6 +13,6 @@ env.elasticNewIndexName='month-test'
 
 if (System.getenv('HOSTNAME').contains('stageEnv')) {
     env.nodeWorkingDir='/nfsshare'
-    env.slurmIP='192.168.100.214'
-    env.elasticIP='192.168.100.234'
+    env.slurmIP='190.192.192.192'
+    env.elasticIP='190.168.168.168'
 }
